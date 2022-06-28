@@ -13,20 +13,23 @@ public class EnquireQueryParams
 public interface IEnquireSolutionsApiClient
 {
     [Get("/Individual/{id}")]
-    Task<IndividualResponse> Individual([AliasAs("id")] int individualId, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+    Task<IndividualResponse> IndividualGet([AliasAs("id")] int individualId, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
 
     [Put("/Object")]
-    Task<IEnumerable<ObjectPutResponse>> Object([Body(true)] ObjectRequest objectRequest, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+    Task<IEnumerable<ObjectPutResponse>> ObjectPut([Body(true)] ObjectRequest objectRequest, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
 
     [Get("/Portal")]
-    Task<IEnumerable<PortalResponse>> Portals(CancellationToken cancellationToken = default);
+    Task<IEnumerable<PortalResponse>> PortalsGet(CancellationToken cancellationToken = default);
 
     [Get("/Object?Type=23")]
-    Task<IndividualObjectResponse> IndividualObject(EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+    Task<IndividualObjectResponse> IndividualObjectGet(EnquireQueryParams parameters, CancellationToken cancellationToken = default);
 
     [Get("/Object?Type=29")]
-    Task<IndividualObjectResponse> FormObject(EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+    Task<IndividualObjectResponse> FormObjectGet(EnquireQueryParams parameters, CancellationToken cancellationToken = default);
 
     [Get("/Address")]
-    Task<IEnumerable<AddressResponse>> Addresses([AliasAs("IndividualId")] int individualId, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+    Task<IEnumerable<AddressResponse>> AddressesGet([AliasAs("IndividualId")] int individualId, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+
+    [Post("/Individual")]
+    Task<string> IndividualPost([Body(true)] IndividualRequest individualRequest, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
 }
