@@ -4,6 +4,11 @@ namespace EnquireSolutions.Sdk.Models;
 
 public class IndividualRequest
 {
+    [JsonProperty(PropertyName = "individuals")]
+    public Individual[] Individuals { get; set; } = default!;
+}
+public class Individual
+{
     [JsonProperty(PropertyName = "properties")]
     public PropertyClass[] Properties { get; set; } = default!;
 

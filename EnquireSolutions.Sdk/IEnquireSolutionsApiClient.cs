@@ -13,23 +13,29 @@ public class EnquireQueryParams
 public interface IEnquireSolutionsApiClient
 {
     [Get("/Individual/{id}")]
-    Task<IndividualResponse> IndividualGet([AliasAs("id")] int individualId, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+    Task<IndividualResponse> IndividualGetAsync([AliasAs("id")] int individualId, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
 
     [Put("/Object")]
-    Task<IEnumerable<ObjectPutResponse>> ObjectPut([Body(true)] ObjectRequest objectRequest, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+    Task<IEnumerable<ObjectPutResponse>> ObjectPutAsync([Body(true)] ObjectRequest objectRequest, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
 
     [Get("/Portal")]
-    Task<IEnumerable<PortalResponse>> PortalsGet(CancellationToken cancellationToken = default);
+    Task<IEnumerable<PortalResponse>> PortalsGetAsync(CancellationToken cancellationToken = default);
 
     [Get("/Object?Type=23")]
-    Task<IndividualObjectResponse> IndividualObjectGet(EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+    Task<IndividualObjectResponse> IndividualObjectGetAsync(EnquireQueryParams parameters, CancellationToken cancellationToken = default);
 
     [Get("/Object?Type=29")]
-    Task<IndividualObjectResponse> FormObjectGet(EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+    Task<IndividualObjectResponse> FormObjectGetAsync(EnquireQueryParams parameters, CancellationToken cancellationToken = default);
 
     [Get("/Address")]
-    Task<IEnumerable<AddressResponse>> AddressesGet([AliasAs("IndividualId")] int individualId, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+    Task<IEnumerable<AddressResponse>> AddressesGetAsync([AliasAs("IndividualId")] int individualId, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
 
     [Post("/Individual")]
-    Task<string> IndividualPost([Body(true)] IndividualRequest individualRequest, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+    Task<IndividualPostResponse> IndividualPostAsync([Body(true)] IndividualRequest individualRequest, EnquireQueryParams parameters, CancellationToken cancellationToken = default);
+
+    [Get("/Search?PageNumber={pageNumber}&PageSize={pageSize}")]
+    Task<SearchResponse> SearchAsync([AliasAs("pageNumber")] int pageNumber, [AliasAs("pageSize")] int pageSize, EnquireQueryParams parameters, CancellationToken cancellationToken);
+
+    [Get("/Search/All?PageNumber={pageNumber}&PageSize={pageSize}")]
+    Task<SearchAllResponse> SearchAllAsync([AliasAs("pageNumber")] int pageNumber, [AliasAs("pageSize")] int pageSize, EnquireQueryParams parameters, CancellationToken cancellationToken);
 }
